@@ -109,11 +109,11 @@ class VehicleController extends Controller
             fputcsv($file, $columns);
 
             foreach ($vehicles as $vehicle) {
-                $row['brand']  = $vehicle->brand;
-                $row['model']    = $vehicle->name;
+                $row['brand']           = $vehicle->brand;
+                $row['model']           = $vehicle->name;
                 $row['serialNumber']    = $vehicle->serialNumber;
-                $row['carRegistration']  = $vehicle->carRegistration;
-                $row['description']  = $vehicle->description;
+                $row['carRegistration'] = $vehicle->carRegistration;
+                $row['description']     = $vehicle->description;
 
                 fputcsv($file, array($row['brand'], $row['model'], $row['serialNumber'], $row['carRegistration'], $row['description']));
             }

@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <span data-href="/exportToCSV" id="export" class="btn btn-success btn-sm" onclick="exportVehicles(event.target);">Export</span>
+                    <span data-href="/exportToCSV" id="export" class="btn btn-info" onclick="exportVehicles(event.target);">Exportar a CSV</span>
                         <a class="btn btn-primary" href="{{ route('vehicles.create') }}">+ Nuevo</a>
                     </div>
                 </div>
@@ -58,6 +58,7 @@
         </div>
       </div>  
 </div>
+
 
 <script>
    function exportVehicles(_this) {
