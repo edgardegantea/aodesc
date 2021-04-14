@@ -4,7 +4,7 @@
 @section('content')
 
 <div class="">
-<br><br>
+    <br><br>
     <div class="card">
         <div class="card-header">
             <div class="row">
@@ -13,8 +13,9 @@
                 </div>
                 <div class="col-md-4">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <span onclick="exportVehiclesToCSV(event.target)" data-href="/exportVehiclesToCSV" id="export" class="btn btn-info">Exportar a CSV</span>
-                        <a class="btn btn-primary" href="{{ route('vehicles.create') }}">+ Nuevo</a>
+                        <span onclick="exportVehiclesToCSV(event.target)" data-href="/exportVehiclesToCSV" id="export"
+                            class="btn btn-info">Exportar a CSV</span>
+                        <a class="btn btn-primary" href="{{ route('users.create') }}">+ Nuevo</a>
                     </div>
                 </div>
             </div>
@@ -25,35 +26,36 @@
 
                 <thead>
                     <tr>
-                        <th>Vehículo</th>
-                        <th>Información</th>
-                        <th>Descripción</th>
-                        
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
                     </tr>
-                    
+
                 </thead>
 
                 <tbody>
-                    @forelse ($vehicles as $vehicle)
+                    @forelse ($users as $user)
                     <tr>
                         <td>
-                            <a class="btn btn-info btn-small" href="{{ route('vehicles.show', $vehicle->id) }}">
-                                <h4>{{ $vehicle->brand }} {{ $vehicle->model }}</h4></td>
-                            </a>
-                        <td>
-                            <p><b>Número de serie: </b>{{ $vehicle->serialNumber }}</p>
-                            <p><b>Color: </b>{{ $vehicle->color }}</p>
+                            <p>{{ $user->id }}</p>
                         </td>
-                        <td><p>{{ $vehicle->description }}</p></td>
-                        
-                    @empty
+                        <td>
+                            <a class="btn btn-info btn-small" href="{{ route('users.show', $user->id) }}">
+                                <h4>{{ $user->name }} </h4>
+                        </td>
+                        </a>
+                        <td>
+                            <p><b>Email: </b>{{ $user->email }}</p>
+
+                        </td>
+                        @emptyindex
                         <h1>La tabla no tiene datos</h1>
                     </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
-      </div>  
+    </div>
 </div>
 
 
@@ -63,16 +65,17 @@
 
 <!-- Aplicación de DataTable -->
 <script>
-    $(function() {
-        $('#example').DataTable();
-    } );
+$(function() {
+    $('#example').DataTable();
+});
 </script>
 
 <script>
-    function exportVehiclesToCSV(_this) {Doris
-        let _url = $(_this).data('href');
-        window.location.href = _url;
-    }
+function exportVehiclesToCSV(_this) {
+    Doris
+    let _url = $(_this).data('href');
+    window.location.href = _url;
+}
 </script>
 
 @endsection

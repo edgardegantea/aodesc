@@ -90,19 +90,19 @@ class VehicleController extends Controller
     }
 
 
-    public function exportToCSV(Request $request) {
+    public function exportVehiclesToCSV(Request $request) {
         $fileName = 'vehicles.csv';
         $vehicles = Vehicle::all();
 
         $headers = array(
-            "Content-type"        => "text/csv",
-            "Content-Disposition" => "attachment; filename=$fileName",
-            "Pragma"              => "no-cache",
-            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
-            "Expires"             => "0"
+            "Content-type"          => "text/csv",
+            "Content-Disposition"   => "attachment; fileName=$fileName",
+            "Pragma"                => "no-cache",
+            "Cache-Control"         => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"               => "0"
         );
 
-        $columns = array('Marca', 'Modelo', 'Número de serie', 'Matrícula', 'Detalles');
+        $columns = array('Marca', 'Modelo', 'Número de serie', 'Color', 'Número de asientos');
 
         $callback = function() use($vehicles, $columns) {
             $file = fopen('php://output', 'w');
@@ -110,18 +110,17 @@ class VehicleController extends Controller
 
             foreach ($vehicles as $vehicle) {
                 $row['brand']           = $vehicle->brand;
-                $row['model']           = $vehicle->name;
+                $row['model']           = $vehicle->model;
                 $row['serialNumber']    = $vehicle->serialNumber;
-                $row['carRegistration'] = $vehicle->carRegistration;
-                $row['description']     = $vehicle->description;
+                $row['color']           = $vehicle->color;
+                $row['numberOfSeats']     = $vehicle->numberOfSeats;
 
-                fputcsv($file, array($row['brand'], $row['model'], $row['serialNumber'], $row['carRegistration'], $row['description']));
+                fputcsv($file, array($row['brand'], $row['model'], $row['serialNumber'], $row['color'], $row['numberOfSeats']));
             }
-
             fclose($file);
         };
-
         return response()->stream($callback, 200, $headers);
+
     }
 
 }
