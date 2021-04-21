@@ -1,28 +1,30 @@
 @extends('plantilla.dashboard')
-
+@section('title', 'Vehículos')
 
 @section('content')
 
 <div class="">
-<br><br>
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-1">
+                    <a class="btn btn-outline-info" href="{{ route('vehicles.create') }}"><i class="fas fa-plus-circle"></i></a>
+                </div>
+                <div class="col-md-7">
                     <h2 class="card-title">Listado de vehículos registrados en la base de datos</h2>
                 </div>
                 <div class="col-md-4">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a class="btn btn-info" href="{{ url('/vehicles/chart') }}">Graficar</a>
-                        <span onclick="exportVehiclesToCSV(event.target)" data-href="/exportVehiclesToCSV" id="export" class="btn btn-info">Exportar a CSV</span>
-                        <a class="btn btn-primary" href="{{ route('vehicles.create') }}">+ Nuevo</a>
+                        <a class="btn btn-outline-info padding-left" href="{{ url('/vehicles/chart') }}"><i class="fas fa-chart-bar"></i></a>
+                        <span onclick="exportVehiclesToCSV(event.target)" data-href="/exportVehiclesToCSV" id="export" class="btn btn-outline-info">Exportar</span>
+
                     </div>
                 </div>
             </div>
         </div>
         <div class="card-body">
 
-            <table id="example" class="table table-striped">
+            <table id="example" class="table table-striped table-responsive">
 
                 <thead>
                     <tr>
@@ -37,15 +39,15 @@
                 <tbody>
                     @forelse ($vehicles as $vehicle)
                     <tr>
-                        <td>
-                            <a class="btn btn-info btn-small" href="{{ route('vehicles.show', $vehicle->id) }}">
-                                <h4>{{ $vehicle->brand }} {{ $vehicle->model }}</h4></td>
+                        <td style="width: 25%">
+                            <a href="{{ route('vehicles.show', $vehicle->id) }}">
+                                <h4 class="text-left"> <span class="badge bg-info">{{ $vehicle->brand }} {{ $vehicle->model }}</span></h4></td>
                             </a>
-                        <td>
+                        <td style="width: 60%">
                             <p><b>Número de serie: </b>{{ $vehicle->serialNumber }}</p>
-                            <p><b>Color: </b>{{ $vehicle->color }}</p>
+                            </p>
                         </td>
-                        <td><p>{{ $vehicle->description }}</p></td>
+                        <td style="width: *"><p>{{ $vehicle->color }}</p></td>
 
                     @empty
                         <h1>La tabla no tiene datos</h1>

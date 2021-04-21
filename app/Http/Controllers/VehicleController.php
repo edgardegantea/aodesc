@@ -132,9 +132,10 @@ class VehicleController extends Controller
             ->pluck('count');
 
         $vehicles2 = Vehicle::select(\DB::raw("COUNT(*) as count"))
-            ->whereBetween('numberOfSeats', ([2, 5]))
-            ->groupBy(\DB::raw("numberOfSeats"))
-            ->pluck('count');
+           ->whereBetween('numberOfSeats', ([2, 10]))
+           ->groupBy(\DB::raw("numberOfSeats"))
+           ->pluck('count');
+
 
         return view('vehicles.chart')
             ->with('vehicles', $vehicles)

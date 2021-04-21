@@ -1,5 +1,7 @@
 @extends('plantilla.dashboard')
 
+@section('title', 'Gráfica de vehículos')
+
 @section('content')
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -117,7 +119,10 @@
 
         Highcharts.chart('container3', {
             chart: {
-                type: 'column'
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
             },
             title: {
                 text: 'Vehículos'
