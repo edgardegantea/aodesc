@@ -5,6 +5,7 @@ use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UserController;
 
+Route::get('/vehicles/chart', [VehicleController::class, 'chart'])->name('/vehicles/chart');
 Route::get('/exportVehiclesToCSV', [VehicleController::class, 'exportVehiclesToCSV'])->name('/exportVehiclesToCSV');
 
 Route::get('/', function () {

@@ -13,6 +13,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a class="btn btn-info" href="{{ url('/vehicles/chart') }}">Graficar</a>
                         <span onclick="exportVehiclesToCSV(event.target)" data-href="/exportVehiclesToCSV" id="export" class="btn btn-info">Exportar a CSV</span>
                         <a class="btn btn-primary" href="{{ route('vehicles.create') }}">+ Nuevo</a>
                     </div>
@@ -28,9 +29,9 @@
                         <th>Vehículo</th>
                         <th>Información</th>
                         <th>Descripción</th>
-                        
+
                     </tr>
-                    
+
                 </thead>
 
                 <tbody>
@@ -45,7 +46,7 @@
                             <p><b>Color: </b>{{ $vehicle->color }}</p>
                         </td>
                         <td><p>{{ $vehicle->description }}</p></td>
-                        
+
                     @empty
                         <h1>La tabla no tiene datos</h1>
                     </tr>
@@ -53,7 +54,7 @@
                 </tbody>
             </table>
         </div>
-      </div>  
+      </div>
 </div>
 
 
