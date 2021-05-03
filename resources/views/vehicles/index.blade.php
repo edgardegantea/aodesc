@@ -3,7 +3,7 @@
 
 @section('content')
 
-<div class="">
+<div class="container">
     <div class="card">
         <div class="card-header">
             <div class="row">
@@ -15,8 +15,13 @@
                 </div>
                 <div class="col-md-4">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a class="btn btn-outline-info padding-left" href="{{ url('/vehicles/chart') }}"><i class="fas fa-chart-bar"></i></a>
-                        <span onclick="exportVehiclesToCSV(event.target)" data-href="/exportVehiclesToCSV" id="export" class="btn btn-outline-info">Exportar</span>
+                        <a class='btn btn-outline-info mr-2' href="{{ url('/vehicles/import') }}"><i class="fas fa-file-import"></i></a>
+                        <a class="btn btn-outline-info mr-2" href="{{ url('/vehicles/cards') }}" alt="Vista en cards"><i class="fas fa-border-all"></i></a>
+                        <a class="btn btn-outline-info mr-2" href="{{ url('/vehicles/chart') }}"><i class="fas fa-chart-bar"></i></a>
+                        <a class="btn btn-outline-info mr-2" href="{{ url('/vehicles/exportToXlsx') }}"><i class="fas fa-file-excel"></i></a>
+                        <span onclick="exportVehiclesToCSV(event.target)" data-href="/exportVehiclesToCSV" id="export" class="btn btn-outline-info">
+                            <i class="fas fa-file-csv"></i>
+                        </span>
 
                     </div>
                 </div>
@@ -41,22 +46,25 @@
                     <tr>
                         <td style="width: 25%">
                             <a href="{{ route('vehicles.show', $vehicle->id) }}">
-                                <h4 class="text-left"> <span class="badge bg-info">{{ $vehicle->brand }} {{ $vehicle->model }}</span></h4></td>
-                            </a>
+                                <h4 class="text-left"> <span class="badge bg-info">{{ $vehicle->brand }} {{ $vehicle->model }}</span></h4>
+                        </td>
+                        </a>
                         <td style="width: 60%">
                             <p><b>Número de serie: </b>{{ $vehicle->serialNumber }}</p>
                             </p>
                         </td>
-                        <td style="width: *"><p>{{ $vehicle->color }}</p></td>
+                        <td style="width: *">
+                            <p>{{ $vehicle->color }}</p>
+                        </td>
 
-                    @empty
+                        @empty
                         <h1>La tabla no tiene datos</h1>
                     </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
-      </div>
+    </div>
 </div>
 
 
@@ -68,11 +76,12 @@
 <script>
     $(function() {
         $('#example').DataTable();
-    } );
+    });
 </script>
 
 <script>
-    function exportVehiclesToCSV(_this) {Doris
+    function exportVehiclesToCSV(_this) {
+        Doris
         let _url = $(_this).data('href');
         window.location.href = _url;
     }

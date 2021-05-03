@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Exports\VehicleExport;
+use App\Imports\VehiclesImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class VehicleController extends Controller
 {
@@ -142,4 +145,23 @@ class VehicleController extends Controller
             ->with('vehicles2', $vehicles2);
     }
 
+
+    public function cards() {
+        $vehicles = Vehicle::all();
+        return view('vehicles.cards', compact('vehicles'));
+    }
+
+    public function exportToXlsx() {
+        return Excel::download(new VehicleExport, 'vehicles.xlsx');
+    }
+
+    public function import() {
+        return view('vehicles.import');
+    }
+
+    public function importData(Request $request) {
+        Excel::import(new VehiclesImport, request()->file('excel'));
+        return redirect()->to(url('vehicles'));
+    }
+    
 }

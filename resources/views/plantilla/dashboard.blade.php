@@ -10,6 +10,7 @@
         Sistema - @yield('title')
     </title>
 
+
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- IonIcons -->
@@ -134,7 +135,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="./index2.html" class="nav-link">
+                                <a href="{{ url('users') }}" class="nav-link">
                                     <i class="fas fa-user-friends nav-icon"></i>
                                     <p>Usuarios</p>
                                 </a>
@@ -175,7 +176,7 @@
         <!-- /.content-header -->
 
         <!-- Main content -->
-        <div class="container">
+        <div class="">
             @yield('content')
         </div>
 
