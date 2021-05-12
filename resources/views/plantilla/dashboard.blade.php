@@ -35,7 +35,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="index3.html" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link">Contact</a>
@@ -87,7 +87,7 @@
                         </div>
                     </li>
                 @endguest
-            </ul>
+
         </ul>
     </nav>
     <!-- /.navbar -->
@@ -97,7 +97,8 @@
         <!-- Brand Logo -->
         <a href="{{ url('/home') }}" class="brand-link">
             <img src="{{ asset('dist/img/AdminLTELogo.png') }}"
-                 class="brand-image img-circle elevation-3"> <span class="brand-text font-weight-light">Sistema</span>
+                 class="brand-image img-circle elevation-3" alt="Admin"> <span class="brand-text font-weight-light">
+            </span>
         </a>
 
         <!-- Sidebar -->

@@ -3,8 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\SupportController;
+use App\Http\Controllers\InformationController;
 use App\Http\Controllers\UserController;
-
+use App\Models\Vehicle;
+use App\Models\User;
+use App\Models\Information;
 
 // Rutas personalizadas
 Route::get('/vehicles/import', [VehicleController::class, 'import'])->name('/vehicles/import');
@@ -20,14 +23,19 @@ Route::get('/exportVehiclesToCSV', [VehicleController::class, 'exportVehiclesToC
 
 // Rutas del sistema y de tipo resource
 Route::get('/', function () {
-    return view('welcome');
+    $information = Information::all();
+    $vehicles = Vehicle::all();
+    return view('welcome')
+        ->with('vehicles', $vehicles)
+        ->with('information', $information);
 });
 
 
 Route::resources([
-    'vehicles'  => VehicleController::class,
-    'soporte'   => SupportController::class,
-    'users'     => UserController::class,
+    'vehicles'      => VehicleController::class,
+    'soporte'       => SupportController::class,
+    'users'         => UserController::class,
+    'information'   => InformationController::class,
 ]);
 
 Auth::routes();
