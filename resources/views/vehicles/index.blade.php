@@ -15,6 +15,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a class='btn btn-outline-info mr-2' href="{{ url('/vehicles/xml') }}"><i class="fas fa-file-export"></i></a>
                         <a class='btn btn-outline-info mr-2' href="{{ url('/vehicles/import') }}"><i class="fas fa-file-import"></i></a>
                         <a class="btn btn-outline-info mr-2" href="{{ url('/vehicles/cards') }}" alt="Vista en cards"><i class="fas fa-border-all"></i></a>
                         <a class="btn btn-outline-info mr-2" href="{{ url('/vehicles/chart') }}"><i class="fas fa-chart-bar"></i></a>
@@ -33,17 +34,20 @@
 
                 <thead>
                     <tr>
+                        <th>Imagen</th>
                         <th>Vehículo</th>
                         <th>Información</th>
                         <th>Descripción</th>
-
                     </tr>
-
                 </thead>
 
                 <tbody>
                     @forelse ($vehicles as $vehicle)
                     <tr>
+                        <td>
+                            <img style="height: 100px; width: 200px; object-fit: cover;"  src="/imagenes/vehicles/{{ $vehicle->image }}" alt="{{ $vehicle->brand }} {{ $vehicle->model }}" />
+                        </td>
+
                         <td style="width: 25%">
                             <a href="{{ route('vehicles.show', $vehicle->id) }}">
                                 <h4 class="text-left"> <span class="badge bg-info">{{ $vehicle->brand }} {{ $vehicle->model }}</span></h4>
@@ -63,6 +67,7 @@
                     @endforelse
                 </tbody>
             </table>
+
         </div>
     </div>
 </div>
@@ -75,7 +80,12 @@
 <!-- Aplicación de DataTable -->
 <script>
     $(function() {
-        $('#example').DataTable();
+        $('#example').DataTable({
+            dom: 'Blfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+        });
     });
 </script>
 

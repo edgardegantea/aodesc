@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Models\Information;
 
 // Rutas personalizadas
+Route::get('/vehicles/xml', [VehicleController::class, 'exportXml'])->name('/vehicles/xml');
+Route::get('/users/exportToXml', [UserController::class, 'exportToXml'])->name('/users/exportToXml');
 Route::get('/vehicles/import', [VehicleController::class, 'import'])->name('/vehicles/import');
 Route::post('/vehicles/importData', [VehicleController::class, 'importData'])->name('/vehicles/importData');
 Route::get('/users/import', [UserController::class, 'import'])->name('/users/import');
@@ -24,7 +26,7 @@ Route::get('/exportVehiclesToCSV', [VehicleController::class, 'exportVehiclesToC
 // Rutas del sistema y de tipo resource
 Route::get('/', function () {
     $information = Information::all();
-    $vehicles = Vehicle::all();
+    $vehicles = Vehicle::all()->take(5);
     return view('welcome')
         ->with('vehicles', $vehicles)
         ->with('information', $information);

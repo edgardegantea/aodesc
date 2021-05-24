@@ -19,11 +19,14 @@
                             class="btn btn-info ml-2"><i class="fas fa-file-csv"></i></span>
                         <a class="btn btn-outline-info ml-2" href="{{ url('/users/exportToXlsx') }}">
                             <i class="fas fa-file-excel"></i>
-                    </a>
+                        </a>
+                        <a class="btn btn-outline-info ml-2" href="{{ url('/users/exportToXml') }}">
+                            <i class="fas fa-file-xml"></i>
+                        </a>
                         <a class="btn btn-outline-info ml-2" href="{{ url('/users/import') }}">
                             <i class="fas fa-file-import"></i>
-                    </a>
-                        
+                        </a>
+
                     </div>
                 </div>
             </div>
@@ -56,7 +59,7 @@
                             <p><b>Email: </b>{{ $user->email }}</p>
 
                         </td>
-                    @empty
+                        @empty
                         <h1>La tabla no tiene datos</h1>
                     </tr>
                     @endforelse

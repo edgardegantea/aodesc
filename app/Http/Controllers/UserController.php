@@ -17,9 +17,13 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
-
     public function exportToXlsx() {
         return Excel::download(new UsersExport, 'usuarios.xlsx');
+    }
+
+    public function exportToXml() {
+        // return (new UsersExport)->download('invoices.xml', \Maatwebsite\Excel\Excel::XML);
+        return "1234";
     }
 
     public function import() {

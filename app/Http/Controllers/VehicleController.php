@@ -9,6 +9,7 @@ use App\Exports\VehicleExport;
 use App\Imports\VehiclesImport;
 use Maatwebsite\Excel\Facades\Excel;
 
+
 class VehicleController extends Controller
 {
     /**
@@ -40,10 +41,22 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
-        $vehicle = request()->except('_token');
-        Vehicle::insert($vehicle);
+        $vehicle = $request->except('_token');
+        if ($img = $request->file('image')) {
+            $destinationPath = 'imagenes/vehicles/';
+            $name = date('YmdHis') . "." . 
+            $img->getClientOriginalExtension();
+            $img->move($destinationPath, $name);
+            $vehicle['image'] = "$name";
+        }
+
+        Vehicle::create($vehicle);
+
         return redirect()->to(url('/vehicles'));
     }
+
+
+
 
     /**
      * Display the specified resource.
@@ -162,6 +175,21 @@ class VehicleController extends Controller
     public function importData(Request $request) {
         Excel::import(new VehiclesImport, request()->file('excel'));
         return redirect()->to(url('vehicles'));
+    }
+
+    public function exportXml() {
+        $vehicles = Vehicle::all();
+        
+        header("Content-type: text/xml");
+        echo ("<vehicles>");
+
+        foreach ($vehicles as $vehicle) {
+            echo ("<marca>" . $vehicle['brand'] . "</marca>" );
+            echo ("<modelo>" . $vehicle['model'] . "</modelo>" );
+            echo ("<color>" . $vehicle['color'] . "</color>" );
+            echo ("<description>" . $vehicle['description'] . "</description>" );
+        }
+        echo ("</vehicles>");
     }
     
 }
